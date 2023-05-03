@@ -9,7 +9,17 @@ const { authenticate } = require("../../middlewares/index");
 const { upload } = require('../../middlewares/index')
 
 
-router.post('/register', validateBody(schemas.registerSchema), ctrl.register)
+
+
+router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
+
+router.get("/verify/:verificationToken", ctrl.verify);
+
+router.post(
+  "/resend-verification-email",
+  validateBody(schemas.resendEmail),
+  ctrl.resendVerificationEmail
+);
 
 router.post('/login', validateBody(schemas.loginSchema), ctrl.login)
 router.get("/current", authenticate, ctrl.getCurrent);
